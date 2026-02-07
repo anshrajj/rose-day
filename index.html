@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🌹Happy Rose Day🌹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:cursive;
+  background:#f6f0ed;
+  color:#5a1f1f;
+  overflow-x:hidden;
+}
+
+/* PASSWORD */
+#lock{
+  position:fixed; inset:0;
+  display:flex; justify-content:center; align-items:center;
+}
+.lock-box{
+  background:#fff;
+  padding:30px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 10px 40px rgba(0,0,0,.2);
+}
+.lock-box input{
+  padding:10px;
+  border-radius:20px;
+  border:1px solid #ccc;
+  width:200px;
+}
+.lock-box button{
+  margin-top:15px;
+  padding:10px 26px;
+  border:none;
+  border-radius:20px;
+  background:#b11226;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* MAIN */
+#main{display:none; padding:30px}
+
+/* HEADING */
+#roseDay{
+  text-align:center;
+  font-size:50px;
+  color:#b11226;
+  margin-bottom:10px;
+  animation:pulse 2s infinite;
+  letter-spacing:2px;
+  position: relative;
+  z-index: 5;        /* 👈 heading hamesha upar rahegi */
+  white-space: nowrap;
+}
+
+#roseDay .emoji{
+  display:inline-block;
+  margin:0 8px;
+  animation:float 2s infinite ease-in-out;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* TEXT */
+.section{text-align:center;margin:30px 0}
+
+/* PHOTOS */
+.photos{
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+}
+.photo-card{
+  width:140px; height:180px;
+  perspective:1000px; cursor:pointer;
+}
+.photo-inner{
+  width:100%; height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:.8s;
+}
+.photo-card.flipped .photo-inner{transform:rotateY(180deg)}
+.photo-front,.photo-back{
+  position:absolute; inset:0;
+  border-radius:14px;
+  backface-visibility:hidden;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+.photo-front img{
+  width:100%; height:100%; object-fit:cover;
+}
+.photo-back{
+  background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  padding:12px; text-align:center;
+  transform:rotateY(180deg);
+}
+
+/* ROSE */
+#rose-area{text-align:center;margin-top:90px}
+#roseSVG{width:160px}
+
+/* ENVELOPE */
+#envelope{
+  width:60px; height:40px;
+  background:#fff; border-radius:6px;
+  margin:20px auto; cursor:pointer;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+}
+#env-flap{
+  position:absolute; top:0;
+  width:100%; height:50%;
+  background:#f1f1f1;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+}
+
+/* LETTER */
+#letterPage{
+  position:fixed; inset:0;
+  display:none; justify-content:center; align-items:center;
+  background:#fdfcf8;
+}
+.page{
+  width:90%; max-width:420px; height:75%;
+  background:repeating-linear-gradient(#fff,#fff 28px,#ccd 29px);
+  padding:20px; border-radius:10px;
+  box-shadow:0 0 30px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+/* RAIN */
+#rain span{
+  position:fixed; top:-40px;
+  font-size:22px;
+  animation:fall linear infinite;
+  pointer-events:none;
+  
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+  <div class="lock-box">
+    <h3>This is for u My Golu Molu Panda🐼</h3>
+    <input type="password" id="pwd" placeholder="Enter password">
+    <br>
+    <button onclick="unlock()">Unlock</button>
+    <p id="err"></p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <h1 id="roseDay">
+    🌹HAPPY <span class="roseemoji"></span> ROSE DAY🌹<br>
+    ❤️MY LOVE❤️
+  </h1>
+
+  <div class="section">
+    ❤️Kuch ehsaas lafzon se zyada gehre hote hain❤️<br>
+    🌹Aur tum un ehsaason ka sabse khoobsurat sabab ho.🌹
+  </div>
+
+  <!-- PHOTOS -->
+  <div class="photos">
+    <div class="photo-card" onclick="flip(this)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="photo1.jpg"></div>
+        <div class="photo-back">“““Tumhari muskaan meri aadat ban chuki hai, waise hi  
+          Tumhara hona hi kaafi hai,
+          bina kuch kahe
+          sab kuch keh jaata hai.”””🌸</div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="photo2.jpg"></div>
+        <div class="photo-back">“““Tum paas hoti ho toh sab theek lagta hai, jaise 
+          Tumhe dekh kar dil ko koi shor nahi,
+          sirf sukoon milta hai.””” 💗</div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="photo3.jpg"></div>
+        <div class="photo-back">“““Tumhari shanti, mere dil ka sukoon ,
+          Ye sirf ek tasveer nahi,yeh woh ehsaas hai
+          jo mujhe tumse milta hai.”””🌹</div>
+      </div>
+    </div>
+    <div class="photo-card" onclick="flip(this)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="photo4.jpg"></div>
+        <div class="photo-back">“““Tumhari ek jhalak bhi kaafi hoti hai,
+          mere din ko thoda behtar
+          aur dil ko thoda shaant banaane ke liye.””” 💗🌹</div>
+      </div>
+    </div>
+    <div class="photo-card" onclick="flip(this)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="photo5.jpg"></div>
+        <div class="photo-back">“““Har tasveer mein sirf chehra nahi,
+          mujhe woh sukoon dikhta hai
+          jo tum mere dil ko deti ho.””” 🌸 🌹</div>
+      </div>
+    </div>
+    <div class="photo-card" onclick="flip(this)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="photo6.jpg"></div>
+        <div class="photo-back">“““Main zyada kuch nahi kehta,
+        par ye tasveer dekh kar
+        dil khud hi muskura leta hai.”””🌹</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROSE -->
+  <div id="rose-area">
+    <svg id="roseSVG" viewBox="0 0 200 400">
+      <line x1="100" y1="380" x2="100" y2="220" stroke="#2f6b3f" stroke-width="6"/>
+      <ellipse cx="80" cy="300" rx="20" ry="10" fill="#3f8f55"/>
+      <ellipse cx="120" cy="300" rx="20" ry="10" fill="#3f8f55"/>
+      <g>
+        <circle cx="100" cy="200" r="28" fill="#b11226"/>
+        <circle cx="78" cy="200" r="24" fill="#c4162d"/>
+        <circle cx="122" cy="200" r="24" fill="#c4162d"/>
+      </g>
+    </svg>
+
+    <div id="envelope" onclick="openLetter()">
+      <div id="env-flap"></div>
+    </div>
+    💌 Tap the envelope
+  </div>
+</div>
+
+<!-- LETTER -->
+<div id="letterPage">
+  <div class="page">
+<pre id="text"></pre>
+  </div>
+</div>
+
+<div id="rain"></div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const PASSWORD="matrola";
+
+function unlock(){
+  if(pwd.value===PASSWORD){
+    lock.style.display="none";
+    main.style.display="block";
+    bgMusic.volume=0.25;
+    bgMusic.play();
+    startRain();
+  }else err.innerText="Wrong password 💔";
+}
+
+function flip(card){card.classList.toggle("flipped")}
+
+function startRain(){
+  setInterval(()=>{
+    const s=document.createElement("span");
+    s.innerText=Math.random()>0.5?"🌹":"💖";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=3+Math.random()*4+"s";
+    rain.appendChild(s);
+    setTimeout(()=>s.remove(),7000);
+  },300);
+}
+
+const letter=`Ka ho … Kareja hm bhulal naikhi kuch 
+special karat rahi bas so aage-->
+"""My Motki , My sweetheart💖,Janta hu ki kabhi kabhi
+kuch jyada kr dete hai ,or bahut si important baate
+na chahte hue bhi bhul ja rahe hai or ish baar to 
+to had hi ho gyaa hai hai aisha hi ho raha hai mere sath,
+or ishi ke chakkr me  tmko gussa bhi dila rahe hai
+ishi ki maafi maagne ke liye ye banaye ki tumko achha lagega , 
+hmr motki hmko pta hai tu hmra ke maaf kr debu love you Jaan💗""" 
+
+Tumhari maujoodgi
+koi shor nahi karti,
+par jab bhi hoti hai na,
+sab kuch zyada khoobsurat lagne lagta hai.
+
+Tumse baat ho jaaye toh din halka sa ho jaata hai,
+aur na ho toh bhi
+tumhara khayal
+saath chal hi leta hai.
+
+Main perfect nahi hoon,
+par tumhe chahna
+mujhe thoda behtar bana deta hai.
+
+Tumhari ek muskaan,
+mere dil ke un kone tak pahunch jaati hai
+jahan lafz aksar kam pad jaate hain.
+
+Aur sach kahoon toh…
+main future ke baare mein zyada nahi sochta,
+bas itna jaanta hoon—
+agar usme tum ho na,
+toh woh future mujhe bahut apna sa lagta hai 🌹🐼`;
+
+function openLetter(){
+  letterPage.style.display="flex";
+  text.innerHTML="";
+  let i=0;
+  const t=setInterval(()=>{
+    text.innerHTML+=letter[i++];
+    if(i>=letter.length) clearInterval(t);
+  },35);
+}
+</script>
+
+</body>
+</html>
