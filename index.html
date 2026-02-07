@@ -107,6 +107,7 @@ body{
   position:relative;
   transform-style:preserve-3d;
   transition:.8s;
+  z-index:2
 }
 .photo-card.flipped .photo-inner{transform:rotateY(180deg)}
 .photo-front,.photo-back{
@@ -156,10 +157,20 @@ body{
 
 /* LETTER */
 #letterPage{
-  position:fixed; inset:0;
-  display:none; justify-content:center; align-items:center;
-  background:#fdfcf8;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.45);
+
+  z-index:9999;   /* 🔥 SABSE IMPORTANT LINE */
 }
+
+
 .page{
   width:90%; max-width:420px; height:75%;
   background:repeating-linear-gradient(#fff,#fff 28px,#ccd 29px);
@@ -293,11 +304,13 @@ body{
 </div>
 
 <!-- LETTER -->
-<div id="letterPage">
-  <div class="page">
-<pre id="text"></pre>
+<!-- LETTER -->
+<div id="letterPage" onclick="this.style.display='none'">
+  <div class="page" onclick="event.stopPropagation()">
+    <pre id="text"></pre>
   </div>
 </div>
+
 
 <div id="rain"></div>
 
