@@ -6,12 +6,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+#main {
+  position: relative;
+  z-index: 5;
+}
+  
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  width:100%;
+  height:100%;
+  background:#f6f0ed;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body{
   font-family:cursive;
   background:#f6f0ed;
-  color:#5a1f1f;
-  overflow-x:hidden;
+  color:#5a1f1f;;
 }
 
 /* PASSWORD */
@@ -43,24 +55,30 @@ body{
 }
 
 /* MAIN */
-#main{display:none; padding:30px}
+#main{
+  display:none;
+  padding:30px;
+  min-height:100vh;
+}
 
 /* HEADING */
 #roseDay{
   text-align:center;
+  font-size: clamp(32px, 6vw, 50px);
+  line-height: 1.2;
+
   font-size:50px;
   color:#b11226;
   margin-bottom:10px;
   animation:pulse 2s infinite;
   letter-spacing:2px;
   position: relative;
-  z-index: 5;        /* 👈 heading hamesha upar rahegi */
-  white-space: nowrap;
+  z-index: 5;   
 }
 
 #roseDay .emoji{
   display:inline-block;
-  margin:0 8px;
+  margin:0 10px;
   animation:float 2s infinite ease-in-out;
 }
 
@@ -81,7 +99,7 @@ body{
   display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
 }
 .photo-card{
-  width:140px; height:180px;
+  width:190px; height:250px;
   perspective:1000px; cursor:pointer;
 }
 .photo-inner{
@@ -104,26 +122,36 @@ body{
 .photo-back{
   background:#fff;
   display:flex; align-items:center; justify-content:center;
-  padding:12px; text-align:center;
+  padding:0px; text-align:center;
   transform:rotateY(180deg);
 }
 
 /* ROSE */
-#rose-area{text-align:center;margin-top:90px}
+#rose-area{text-align:center;margin-top:40px}
 #roseSVG{width:160px}
 
 /* ENVELOPE */
 #envelope{
-  width:60px; height:40px;
-  background:#fff; border-radius:6px;
-  margin:20px auto; cursor:pointer;
-  box-shadow:0 6px 15px rgba(0,0,0,.2);
+  width:30px; height:20px;
+  background:#fff; border-radius:5px;
+  margin:10px auto; cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  transition: transform 0.2s;
+  
+}
+#envelope:active {
+  transform: scale(0.92);
 }
 #env-flap{
   position:absolute; top:0;
   width:100%; height:50%;
-  background:#f1f1f1;
-  clip-path:polygon(0 0,100% 0,50% 100%);
+  
+  
 }
 
 /* LETTER */
@@ -141,6 +169,14 @@ body{
 }
 
 /* RAIN */
+#rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
 #rain span{
   position:fixed; top:-40px;
   font-size:22px;
@@ -151,6 +187,7 @@ body{
 @keyframes fall{
   to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
+
 </style>
 </head>
 
@@ -249,9 +286,9 @@ body{
     </svg>
 
     <div id="envelope" onclick="openLetter()">
-      <div id="env-flap"></div>
+      💌 
     </div>
-    💌 Tap the envelope
+    <p>Tap the Envelope</p>
   </div>
 </div>
 
@@ -291,7 +328,7 @@ function startRain(){
     s.style.animationDuration=3+Math.random()*4+"s";
     rain.appendChild(s);
     setTimeout(()=>s.remove(),7000);
-  },300);
+  },50);
 }
 
 const letter=`Ka ho … Kareja hm bhulal naikhi kuch 
